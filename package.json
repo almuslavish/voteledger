@@ -1,0 +1,39 @@
+{
+  "name": "voteledger",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "next": "^16.4.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "@fontsource-variable/dm-sans": "^5.2.6",
+    "@fontsource-variable/space-grotesk": "^5.2.6",
+    "@tailwindcss/postcss": "^4.3.3",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.4.3",
+    "postcss": "^8.5.23",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "overrides": {
+    "postcss-selector-parser": "^7.1.6"
+  }
+}

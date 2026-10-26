@@ -1,0 +1,12 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight, ReceiptText, Zap } from "lucide-react";
+import { getCampaign } from "@/lib/data";
+import { StatusBadge } from "@/components/status-badge";
+
+export default async function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const campaign = getCampaign(id);
+  if (!campaign) notFound();
+  return <main className="page-wrap content-page narrow-page"><Link className="back-link" href="/funding"><ArrowLeft size={15} /> Funding directory</Link><div className="eyebrow eyebrow-dark">CAMPAIGN DETAIL <span className="demo-dot" /> FICTIONAL</div><div className="detail-heading"><div><h1 className="page-title">{campaign.title}</h1><p>Organizer reference {campaign.organizerRef}</p></div><StatusBadge label={campaign.status} /></div><p className="page-intro">{campaign.description}</p><div className="funding-detail-total"><span>Confirmed demonstration total</span><strong>{campaign.confirmedSats.toLocaleString()} <small>sats</small></strong><span>Target: {campaign.targetSats.toLocaleString()} sats</span><span className="progress-track"><span style={{ width: `${Math.min(100, (campaign.confirmedSats / campaign.targetSats) * 100)}%` }} /></span><div className="separate-totals"><span>Confirmed sample value <strong>{campaign.confirmedSats.toLocaleString()} sats</strong></span><span>Simulated contribution examples <strong>{campaign.simulatedSats.toLocaleString()} sats</strong></span></div></div><section className="expenditure-section"><div className="section-heading compact-heading"><div><span className="eyebrow eyebrow-dark"><ReceiptText size={13} /> PUBLIC RECORDS</span><h2>Published expenditures</h2></div></div>{campaign.expenditures.map((expense) => <div className="expense-row" key={expense.item}><span className="expense-icon"><ReceiptText size={17} /></span><div><strong>{expense.item}</strong><small>Sample expenditure · {expense.publishedAt}</small></div><b>₦{expense.amountNgn.toLocaleString()}</b></div>)}<p className="integrity-note">These are fictional sample entries. Receiving a payment does not verify how money was spent.</p></section><Link className="button button-green" href={`/funding/${campaign.id}/contribute`}>Open contribution demo <Zap size={16} /></Link></main>;
+}
